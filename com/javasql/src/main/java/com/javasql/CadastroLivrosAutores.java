@@ -24,8 +24,8 @@ public class CadastroLivrosAutores {
                     "ano_publicacao INT NOT NULL" +
                     ")";
 
-            stmt = conn.createStatement();
-            stmt.executeUpdate(sqlLivros);
+            Statement stmtLivros = conn.createStatement();
+            stmtLivros.executeUpdate(sqlLivros);
             System.out.println("Tabela 'livros' criada com sucesso!");
 
             // Criação da tabela autores
@@ -34,27 +34,46 @@ public class CadastroLivrosAutores {
                     "nome_autor VARCHAR(255) NOT NULL" +
                     ")";
 
-            stmt.executeUpdate(sqlAutores);
+            Statement stmtAutores = conn.createStatement();
+            stmtAutores.executeUpdate(sqlAutores);
             System.out.println("Tabela 'autores' criada com sucesso!");
 
             // Inserir dados na tabela livros
-            String tituloLivro = "Livro A";
-            int anoPublicacao = 2021;
+            String tituloLivro = "Aprendendo Python";
+            int anoPublicacao = 2020;
             String sqlInsertLivro = "INSERT INTO livros (titulo, ano_publicacao) VALUES (?, ?)";
 
-            pstmt = conn.prepareStatement(sqlInsertLivro);
+            PreparedStatement pstmt = conn.prepareStatement(sqlInsertLivro);
             pstmt.setString(1, tituloLivro);
             pstmt.setInt(2, anoPublicacao);
             pstmt.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'livros'!");
 
+            String tituloLivro2 = "Introdução à Inteligência Artificial";
+            int anoPublicacao2 = 2019;
+            String sqlInsertLivro2 = "INSERT INTO livros (titulo, ano_publicacao) VALUES (?, ?)";
+
+            PreparedStatement pstmt2 = conn.prepareStatement(sqlInsertLivro2);
+            pstmt2.setString(1, tituloLivro2);
+            pstmt2.setInt(2, anoPublicacao2);
+            pstmt2.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'livros'!");
+
             // Inserir dados na tabela autores
-            String nomeAutor = "Autor A";
+            String nomeAutor = "Carlos Silva";
             String sqlInsertAutor = "INSERT INTO autores (nome_autor) VALUES (?)";
 
-            pstmt = conn.prepareStatement(sqlInsertAutor);
-            pstmt.setString(1, nomeAutor);
-            pstmt.executeUpdate();
+            PreparedStatement pstmt3 = conn.prepareStatement(sqlInsertAutor);
+            pstmt3.setString(1, nomeAutor);
+            pstmt3.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'autores'!");
+
+            String nomeAutor2 = "Ana Souza";
+            String sqlInsertAutor2 = "INSERT INTO autores (nome_autor) VALUES (?)";
+
+            PreparedStatement pstmt4 = conn.prepareStatement(sqlInsertAutor2);
+            pstmt4.setString(1, nomeAutor2);
+            pstmt4.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'autores'!");
 
         } catch (SQLException e) {

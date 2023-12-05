@@ -39,8 +39,8 @@ public class RegistroClientesVendas {
             System.out.println("Tabela 'vendas' criada com sucesso!");
 
             // Inserir dados na tabela clientes
-            String nomeCliente = "Cliente Teste";
-            String emailCliente = "cliente@teste.com";
+            String nomeCliente = "Ana";
+            String emailCliente = "ana@example.com";
             String sqlInsertCliente = "INSERT INTO clientes (nome, email) VALUES (?, ?)";
 
             PreparedStatement stmtInsertCliente = conn.prepareStatement(sqlInsertCliente);
@@ -49,10 +49,20 @@ public class RegistroClientesVendas {
             stmtInsertCliente.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'clientes'!");
 
+            String nomeCliente2 = "Pedro";
+            String emailCliente2 = "pedro@example.com";
+            String sqlInsertCliente2 = "INSERT INTO clientes (nome, email) VALUES (?, ?)";
+
+            PreparedStatement stmtInsertCliente2 = conn.prepareStatement(sqlInsertCliente2);
+            stmtInsertCliente2.setString(1, nomeCliente2);
+            stmtInsertCliente2.setString(2, emailCliente2);
+            stmtInsertCliente2.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'clientes'!");
+
             // Inserir dados na tabela vendas
             int idCliente = 1; // ID do cliente registrado anteriormente
-            String produtoVendido = "Produto Teste";
-            double valorVenda = 10.5;
+            String produtoVendido = "Celular";
+            double valorVenda = 1200.00;
             String sqlInsertVenda = "INSERT INTO vendas (id_cliente, produto_vendido, valor) VALUES (?, ?, ?)";
 
             PreparedStatement stmtInsertVenda = conn.prepareStatement(sqlInsertVenda);
@@ -60,6 +70,18 @@ public class RegistroClientesVendas {
             stmtInsertVenda.setString(2, produtoVendido);
             stmtInsertVenda.setDouble(3, valorVenda);
             stmtInsertVenda.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'vendas'!");
+
+            int idCliente2 = 2; // ID do cliente registrado anteriormente
+            String produtoVendido2 = "Fones";
+            double valorVenda2 = 150.00;
+            String sqlInsertVenda2 = "INSERT INTO vendas (id_cliente, produto_vendido, valor) VALUES (?, ?, ?)";
+
+            PreparedStatement stmtInsertVenda2 = conn.prepareStatement(sqlInsertVenda2);
+            stmtInsertVenda2.setInt(1, idCliente2);
+            stmtInsertVenda2.setString(2, produtoVendido2);
+            stmtInsertVenda2.setDouble(3, valorVenda2);
+            stmtInsertVenda2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'vendas'!");
 
             conn.close();

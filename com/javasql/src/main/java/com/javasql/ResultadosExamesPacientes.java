@@ -24,8 +24,8 @@ public class ResultadosExamesPacientes {
                     "resultado VARCHAR(255) NOT NULL" +
                     ")";
 
-            stmt = conn.createStatement();
-            stmt.executeUpdate(sqlResultadosExames);
+            Statement stmtExames = conn.createStatement();
+            stmtExames.executeUpdate(sqlResultadosExames);
             System.out.println("Tabela 'resultados_exames' criada com sucesso!");
 
             // Criação da tabela pacientes
@@ -35,29 +35,50 @@ public class ResultadosExamesPacientes {
                     "data_nascimento DATE NOT NULL" +
                     ")";
 
-            stmt.executeUpdate(sqlPacientes);
+            Statement stmtPacientes = conn.createStatement();            
+            stmtPacientes.executeUpdate(sqlPacientes);
             System.out.println("Tabela 'pacientes' criada com sucesso!");
 
             // Inserir dados na tabela resultados_exames
-            String tipoExame = "Exame A";
-            String resultado = "Positivo";
+            String tipoExame = "Exame de Sangue";
+            String resultado = "normal";
             String sqlInsertResultado = "INSERT INTO resultados_exames (tipo_exame, resultado) VALUES (?, ?)";
 
-            pstmt = conn.prepareStatement(sqlInsertResultado);
-            pstmt.setString(1, tipoExame);
-            pstmt.setString(2, resultado);
-            pstmt.executeUpdate();
+            PreparedStatement pstmtExames = conn.prepareStatement(sqlInsertResultado);
+            pstmtExames.setString(1, tipoExame);
+            pstmtExames.setString(2, resultado);
+            pstmtExames.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'resultados_exames'!");
+
+            String tipoExame2 = "Raio-X";
+            String resultado2 = "Fratura identificada";
+            String sqlInsertResultado2 = "INSERT INTO resultados_exames (tipo_exame, resultado) VALUES (?, ?)";
+
+            PreparedStatement pstmtExames2 = conn.prepareStatement(sqlInsertResultado2);
+            pstmtExames2.setString(1, tipoExame2);
+            pstmtExames2.setString(2, resultado2);
+            pstmtExames2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'resultados_exames'!");
 
             // Inserir dados na tabela pacientes
-            String nomePaciente = "Paciente A";
-            String dataNascimento = "1990-01-01";
+            String nomePaciente = "Mariana";
+            String dataNascimento = "1995-06-10";
             String sqlInsertPaciente = "INSERT INTO pacientes (nome_paciente, data_nascimento) VALUES (?, ?)";
 
-            pstmt = conn.prepareStatement(sqlInsertPaciente);
-            pstmt.setString(1, nomePaciente);
-            pstmt.setString(2, dataNascimento);
-            pstmt.executeUpdate();
+            PreparedStatement pstmtPacientes = conn.prepareStatement(sqlInsertPaciente);
+            pstmtPacientes.setString(1, nomePaciente);
+            pstmtPacientes.setString(2, dataNascimento);
+            pstmtPacientes.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'pacientes'!");
+
+            String nomePaciente2 = "Rafael";
+            String dataNascimento2 = "1987-09-25";
+            String sqlInsertPaciente2 = "INSERT INTO pacientes (nome_paciente, data_nascimento) VALUES (?, ?)";
+
+            PreparedStatement pstmtPacientes2 = conn.prepareStatement(sqlInsertPaciente2);
+            pstmtPacientes2.setString(1, nomePaciente2);
+            pstmtPacientes2.setString(2, dataNascimento2);
+            pstmtPacientes2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'pacientes'!");
 
         } catch (SQLException e) {

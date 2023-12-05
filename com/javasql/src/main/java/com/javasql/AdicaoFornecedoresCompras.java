@@ -42,8 +42,8 @@ public class AdicaoFornecedoresCompras {
             System.out.println("Tabela 'compras' criada com sucesso!");
 
             // Inserir dados na tabela fornecedores
-            String nomeFornecedor = "Fornecedor A";
-            String contatoFornecedor = "Contato A";
+            String nomeFornecedor = "Empresa A";
+            String contatoFornecedor = "contato@empresaA.com";
             String sqlInsertFornecedor = "INSERT INTO fornecedores (nome, contato) VALUES (?, ?)";
 
             PreparedStatement stmtInsertFornecedor = conn.prepareStatement(sqlInsertFornecedor);
@@ -52,10 +52,20 @@ public class AdicaoFornecedoresCompras {
             stmtInsertFornecedor.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'fornecedores'!");
 
+            String nomeFornecedor2 = "Empresa B";
+            String contatoFornecedor2 = "contato@empresaB.com";
+            String sqlInsertFornecedor2 = "INSERT INTO fornecedores (nome, contato) VALUES (?, ?)";
+
+            PreparedStatement stmtInsertFornecedor2 = conn.prepareStatement(sqlInsertFornecedor2);
+            stmtInsertFornecedor2.setString(1, nomeFornecedor2);
+            stmtInsertFornecedor2.setString(2, contatoFornecedor2);
+            stmtInsertFornecedor2.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'fornecedores'!");
+
             // Inserir dados na tabela compras
             int idFornecedor = 1; // Coloque o ID correto do fornecedor
-            String produtoComprado = "Produto A";
-            int quantidade = 10;
+            String produtoComprado = "Peças de computador";
+            int quantidade = 100;
             String sqlInsertCompra = "INSERT INTO compras (id_fornecedor, produto_comprado, quantidade) VALUES (?, ?, ?)";
 
             PreparedStatement stmtInsertCompra = conn.prepareStatement(sqlInsertCompra);
@@ -63,6 +73,18 @@ public class AdicaoFornecedoresCompras {
             stmtInsertCompra.setString(2, produtoComprado);
             stmtInsertCompra.setInt(3, quantidade);
             stmtInsertCompra.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'compras'!");
+
+            int idFornecedor2 = 2; // Coloque o ID correto do fornecedor
+            String produtoComprado2 = "Material de escritório";
+            int quantidade2 = 500;
+            String sqlInsertCompra2 = "INSERT INTO compras (id_fornecedor, produto_comprado, quantidade) VALUES (?, ?, ?)";
+
+            PreparedStatement stmtInsertCompra2 = conn.prepareStatement(sqlInsertCompra2);
+            stmtInsertCompra2.setInt(1, idFornecedor2);
+            stmtInsertCompra2.setString(2, produtoComprado2);
+            stmtInsertCompra2.setInt(3, quantidade2);
+            stmtInsertCompra2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'compras'!");
 
             conn.close();

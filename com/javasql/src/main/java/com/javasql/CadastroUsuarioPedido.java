@@ -39,8 +39,8 @@ public class CadastroUsuarioPedido {
             System.out.println("Tabela 'pedido' criada com sucesso!");
 
             //inserir dados na tabela usuarios
-            String nome = "Gabriel Lucas";
-            String email = "gabriel@gmail.com";
+            String nome = "Eduardo";
+            String email = "eduardo@example.com";
             String sqlInsertUsuarios = "INSERT INTO usuarios (nome, email) VALUES (?, ?)";
             
             PreparedStatement stmtInsertUsuarios = conn.prepareStatement(sqlInsertUsuarios);
@@ -49,9 +49,19 @@ public class CadastroUsuarioPedido {
             stmtInsertUsuarios.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'usuarios'!");
 
+            String nome2 = "Laura";
+            String email2 = "laura@example.com";
+            String sqlInsertUsuarios2 = "INSERT INTO usuarios (nome, email) VALUES (?, ?)";
+            
+            PreparedStatement stmtInsertUsuarios2 = conn.prepareStatement(sqlInsertUsuarios2);
+            stmtInsertUsuarios2.setString(1, nome2);
+            stmtInsertUsuarios2.setString(2, email2);
+            stmtInsertUsuarios2.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'usuarios'!");
+
             //inserir dados na tabela pedido
-            String produto = "Teste";
-            int quantidade = 5;
+            String produto = "Livro de Ficção";
+            int quantidade = 3;
             String sqlInsertPedido = "INSERT INTO pedido (id_usuario, produto, quantidade) VALUES (?, ?, ?)";
             
             PreparedStatement stmtInsertPedido = conn.prepareStatement(sqlInsertPedido);
@@ -59,6 +69,17 @@ public class CadastroUsuarioPedido {
             stmtInsertPedido.setString(2, produto);
             stmtInsertPedido.setInt(3, quantidade);
             stmtInsertPedido.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'pedido'!");
+
+            String produto2 = "Fones de Ouvido";
+            int quantidade2 = 1;
+            String sqlInsertPedido2 = "INSERT INTO pedido (id_usuario, produto, quantidade) VALUES (?, ?, ?)";
+            
+            PreparedStatement stmtInsertPedido2 = conn.prepareStatement(sqlInsertPedido2);
+            stmtInsertPedido2.setInt(1, 2); // id do usuário
+            stmtInsertPedido2.setString(2, produto2);
+            stmtInsertPedido2.setInt(3, quantidade2);
+            stmtInsertPedido2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'pedido'!");
 
             conn.close();

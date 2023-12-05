@@ -41,14 +41,24 @@ public class GerenciamentoProjetosAtribuicoes {
             System.out.println("Tabela 'atribuicoes' criada com sucesso!");
 
             // Inserir dados na tabela projetos
-            String nomeProjeto = "Projeto Teste";
-            String descricaoProjeto = "Descrição do Projeto Teste";
+            String nomeProjeto = "Sistema de controle";
+            String descricaoProjeto = "Desenvolvimento de um sistema interno";
             String sqlInsertProjeto = "INSERT INTO projetos (nome_projeto, descricao) VALUES (?, ?)";
 
             PreparedStatement stmtInsertProjeto = conn.prepareStatement(sqlInsertProjeto);
             stmtInsertProjeto.setString(1, nomeProjeto);
             stmtInsertProjeto.setString(2, descricaoProjeto);
             stmtInsertProjeto.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'projetos'!");
+
+            String nomeProjeto2 = "Portal corporativo";
+            String descricaoProjeto2 = "Desenvolvimento de um portal para clientes";
+            String sqlInsertProjeto2 = "INSERT INTO projetos (nome_projeto, descricao) VALUES (?, ?)";
+
+            PreparedStatement stmtInsertProjeto2 = conn.prepareStatement(sqlInsertProjeto2);
+            stmtInsertProjeto2.setString(1, nomeProjeto2);
+            stmtInsertProjeto2.setString(2, descricaoProjeto2);
+            stmtInsertProjeto2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'projetos'!");
 
             // Inserir dados na tabela atribuicoes
@@ -60,6 +70,16 @@ public class GerenciamentoProjetosAtribuicoes {
             stmtInsertAtribuicao.setInt(1, idProjeto);
             stmtInsertAtribuicao.setInt(2, idFuncionario);
             stmtInsertAtribuicao.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'atribuicoes'!");
+
+            int idProjeto2 = 2; // Coloque o ID correto do projeto
+            int idFuncionario2 = 2; // Coloque o ID correto do funcionário
+            String sqlInsertAtribuicao2 = "INSERT INTO atribuicoes (id_projeto, id_funcionario) VALUES (?, ?)";
+
+            PreparedStatement stmtInsertAtribuicao2 = conn.prepareStatement(sqlInsertAtribuicao2);
+            stmtInsertAtribuicao2.setInt(1, idProjeto2);
+            stmtInsertAtribuicao2.setInt(2, idFuncionario2);
+            stmtInsertAtribuicao2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'atribuicoes'!");
 
             conn.close();

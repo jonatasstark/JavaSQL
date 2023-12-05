@@ -24,8 +24,8 @@ public class RegistroEventosParticipantes {
                     "data DATE NOT NULL" +
                     ")";
 
-            stmt = conn.createStatement();
-            stmt.executeUpdate(sqlEventos);
+            Statement stmtEventos = conn.createStatement();
+            stmtEventos.executeUpdate(sqlEventos);
             System.out.println("Tabela 'eventos' criada com sucesso!");
 
             // Criação da tabela participantes
@@ -36,29 +36,50 @@ public class RegistroEventosParticipantes {
                     "FOREIGN KEY (id_evento) REFERENCES eventos(id_evento)" +
                     ")";
 
-            stmt.executeUpdate(sqlParticipantes);
+            Statement stmtParticipantes = conn.createStatement();        
+            stmtParticipantes.executeUpdate(sqlParticipantes);
             System.out.println("Tabela 'participantes' criada com sucesso!");
 
             // Inserir dados na tabela eventos
-            String nomeEvento = "Evento A";
-            String data = "2022-01-01";
+            String nomeEvento = "Conferência de Tecnologia";
+            String data = "2023-12-15";
             String sqlInsertEvento = "INSERT INTO eventos (nome_evento, data) VALUES (?, ?)";
 
-            pstmt = conn.prepareStatement(sqlInsertEvento);
-            pstmt.setString(1, nomeEvento);
-            pstmt.setString(2, data);
-            pstmt.executeUpdate();
+            PreparedStatement pstmtEventos = conn.prepareStatement(sqlInsertEvento);
+            pstmtEventos.setString(1, nomeEvento);
+            pstmtEventos.setString(2, data);
+            pstmtEventos.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'eventos'!");
+
+            String nomeEvento2 = "Workshop de Marketing Digital";
+            String data2 = "2023-11-20";
+            String sqlInsertEvento2 = "INSERT INTO eventos (nome_evento, data) VALUES (?, ?)";
+
+            PreparedStatement pstmtEventos2 = conn.prepareStatement(sqlInsertEvento2);
+            pstmtEventos2.setString(1, nomeEvento2);
+            pstmtEventos2.setString(2, data2);
+            pstmtEventos2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'eventos'!");
 
             // Inserir dados na tabela participantes
             int idEvento = 1;
-            String nomeParticipante = "Participante A";
+            String nomeParticipante = "Gabriel";
             String sqlInsertParticipante = "INSERT INTO participantes (id_evento, nome_participante) VALUES (?, ?)";
 
-            pstmt = conn.prepareStatement(sqlInsertParticipante);
-            pstmt.setInt(1, idEvento);
-            pstmt.setString(2, nomeParticipante);
-            pstmt.executeUpdate();
+            PreparedStatement pstmtParticipantes = conn.prepareStatement(sqlInsertParticipante);
+            pstmtParticipantes.setInt(1, idEvento);
+            pstmtParticipantes.setString(2, nomeParticipante);
+            pstmtParticipantes.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'participantes'!");
+
+            int idEvento2 = 2;
+            String nomeParticipante2 = "Sofia";
+            String sqlInsertParticipante2 = "INSERT INTO participantes (id_evento, nome_participante) VALUES (?, ?)";
+
+            PreparedStatement pstmtParticipantes2 = conn.prepareStatement(sqlInsertParticipante2);
+            pstmtParticipantes2.setInt(1, idEvento2);
+            pstmtParticipantes2.setString(2, nomeParticipante2);
+            pstmtParticipantes2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'participantes'!");
 
         } catch (SQLException e) {

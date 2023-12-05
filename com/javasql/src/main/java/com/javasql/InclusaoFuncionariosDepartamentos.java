@@ -38,8 +38,8 @@ public class InclusaoFuncionariosDepartamentos {
             System.out.println("Tabela 'departamentos' criada com sucesso!");
 
             // Inserir dados na tabela funcionarios
-            String nomeFuncionario = "Funcionario Teste";
-            String cargoFuncionario = "Cargo Teste";
+            String nomeFuncionario = "Luiz";
+            String cargoFuncionario = "Analista";
             String sqlInsertFuncionario = "INSERT INTO funcionarios (nome, cargo) VALUES (?, ?)";
 
             PreparedStatement stmtInsertFuncionario = conn.prepareStatement(sqlInsertFuncionario);
@@ -48,13 +48,31 @@ public class InclusaoFuncionariosDepartamentos {
             stmtInsertFuncionario.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'funcionarios'!");
 
+            String nomeFuncionario2 = "Carla";
+            String cargoFuncionario2 = "Gerente";
+            String sqlInsertFuncionario2 = "INSERT INTO funcionarios (nome, cargo) VALUES (?, ?)";
+
+            PreparedStatement stmtInsertFuncionario2 = conn.prepareStatement(sqlInsertFuncionario2);
+            stmtInsertFuncionario2.setString(1, nomeFuncionario2);
+            stmtInsertFuncionario2.setString(2, cargoFuncionario2);
+            stmtInsertFuncionario2.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'funcionarios'!");
+
             // Inserir dados na tabela departamentos
-            String nomeDepartamento = "Departamento Teste";
+            String nomeDepartamento = "TI";
             String sqlInsertDepartamento = "INSERT INTO departamentos (nome_departamento) VALUES (?)";
 
             PreparedStatement stmtInsertDepartamento = conn.prepareStatement(sqlInsertDepartamento);
             stmtInsertDepartamento.setString(1, nomeDepartamento);
             stmtInsertDepartamento.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'departamentos'!");
+
+            String nomeDepartamento2 = "Recursos Humanos";
+            String sqlInsertDepartamento2 = "INSERT INTO departamentos (nome_departamento) VALUES (?)";
+
+            PreparedStatement stmtInsertDepartamento2 = conn.prepareStatement(sqlInsertDepartamento2);
+            stmtInsertDepartamento2.setString(1, nomeDepartamento2);
+            stmtInsertDepartamento2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'departamentos'!");
 
             conn.close();

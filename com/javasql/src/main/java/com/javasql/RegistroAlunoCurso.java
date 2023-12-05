@@ -40,7 +40,7 @@ public class RegistroAlunoCurso {
             System.out.println("Tabela 'cursos' criada com sucesso!");
 
             // Inserir dados na tabela alunos
-            String nomeAluno = "João";
+            String nomeAluno = "Lucas";
             String turmaAluno = "Turma A";
             String sqlInsertAluno = "INSERT INTO alunos (nome, turma) VALUES (?, ?)";
 
@@ -50,15 +50,35 @@ public class RegistroAlunoCurso {
             stmtInsertAluno.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'alunos'!");
 
+            String nomeAluno2 = "Julia";
+            String turmaAluno2 = "Turma B";
+            String sqlInsertAluno2 = "INSERT INTO alunos (nome, turma) VALUES (?, ?)";
+
+            PreparedStatement stmtInsertAluno2 = conn.prepareStatement(sqlInsertAluno2);
+            stmtInsertAluno2.setString(1, nomeAluno2);
+            stmtInsertAluno2.setString(2, turmaAluno2);
+            stmtInsertAluno2.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'alunos'!");
+
             // Inserir dados na tabela cursos
-            String nomeCurso = "Programação Web";
-            String instrutorCurso = "Jonatas";
+            String nomeCurso = "Matemática";
+            String instrutorCurso = "Professor Carlos";
             String sqlInsertCurso = "INSERT INTO cursos (nome_curso, instrutor) VALUES (?, ?)";
 
             PreparedStatement stmtInsertCurso = conn.prepareStatement(sqlInsertCurso);
             stmtInsertCurso.setString(1, nomeCurso);
             stmtInsertCurso.setString(2, instrutorCurso);
             stmtInsertCurso.executeUpdate();
+            System.out.println("Dados inseridos com sucesso na tabela 'cursos'!");
+
+            String nomeCurso2 = "Ciencias";
+            String instrutorCurso2 = "Professora Ana";
+            String sqlInsertCurso2 = "INSERT INTO cursos (nome_curso, instrutor) VALUES (?, ?)";
+
+            PreparedStatement stmtInsertCurso2 = conn.prepareStatement(sqlInsertCurso2);
+            stmtInsertCurso2.setString(1, nomeCurso2);
+            stmtInsertCurso2.setString(2, instrutorCurso2);
+            stmtInsertCurso2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'cursos'!");
 
             conn.close();

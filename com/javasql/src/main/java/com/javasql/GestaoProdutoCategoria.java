@@ -36,8 +36,8 @@ public class GestaoProdutoCategoria {
             System.out.println("Tabela 'categoria' criada com sucesso!");
 
             //inserir dados na tabela produto
-            String nome = "Produto Teste";
-            double preco = 5;
+            String nome = "Celular";
+            double preco = 1000;
             String sqlInsertProduto = "INSERT INTO produto (nome_produto, preco) VALUES (?, ?)";
             
             PreparedStatement stmtInsertProduto = conn.prepareStatement(sqlInsertProduto);
@@ -47,7 +47,7 @@ public class GestaoProdutoCategoria {
             System.out.println("Dados inseridos com sucesso na tabela 'produto'!");
 
             //inserir dados na tabela categoria
-            String nome_categoria = "Teste";
+            String nome_categoria = "Eletrônico";
             String sqlInsertCategoria = "INSERT INTO categoria (nome_categoria) VALUES (?)";
             
             PreparedStatement stmtInsertCategoria = conn.prepareStatement(sqlInsertCategoria);
