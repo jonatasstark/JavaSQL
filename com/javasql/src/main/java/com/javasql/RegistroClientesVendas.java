@@ -84,10 +84,34 @@ public class RegistroClientesVendas {
             stmtInsertVenda2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'vendas'!");
 
+            deletarDadosClientes(conn, 1);
+
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
+        }
+    }
+
+
+    // função para deletar um cliente com base no ID
+    public static void deletarDadosClientes(Connection conn, int idCliente){
+        String sql = "DELETE FROM clientes WHERE id_cliente = " + idCliente; // remove uma linha da tabela
+
+        try (Statement stmt = conn.createStatement()) {
+            if (stmt.executeUpdate(sql) > 0) {
+                System.out.println("Cliente deletado com sucesso");
+
+                String sql2 = "DELETE FROM vendas WHERE id_cliente = " + idCliente;
+
+                if (stmt.executeUpdate(sql2) > 0) { // se o id inserido for encontrado, as vendas também serão removidas
+                    System.out.println("Vendas relacionadas ao cliente deletado também foram removidas");
+                }
+            } else {
+                System.out.println("Erro ao deletar, verifique o id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

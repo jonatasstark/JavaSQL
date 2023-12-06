@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class GerenciamentoProjetosAtribuicoes {
     public static void main(String[] args) {
@@ -82,10 +83,33 @@ public class GerenciamentoProjetosAtribuicoes {
             stmtInsertAtribuicao2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'atribuicoes'!");
 
+            deletarDadosProjetos(conn, 1);
+
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
         }
     }
+
+    // função para deletar um projeto com base no ID
+    public static void deletarDadosProjetos(Connection conn, int idProjeto) {
+        String sql = "DELETE FROM projetos WHERE id_projeto = " + idProjeto; // remove uma linha da tabela
+
+        try (Statement stmt = conn.createStatement()) {
+            if (stmt.executeUpdate(sql) > 0) {
+                System.out.println("Projeto deletado com sucesso");
+
+                String sql2 = "DELETE FROM atribuicoes WHERE id_atribuicao = " + idProjeto;
+
+                if (stmt.executeUpdate(sql2) > 0) { // se o id inserido for encontrado, as atribuições também serão removidas
+                    System.out.println("Atribuições relacionadas ao projeto deletado também foram removidas");
+                }
+            } else {
+                System.out.println("Erro ao deletar, verifique o id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } 
 }

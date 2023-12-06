@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class InclusaoFuncionariosDepartamentos {
     public static void main(String[] args) {
@@ -75,10 +76,33 @@ public class InclusaoFuncionariosDepartamentos {
             stmtInsertDepartamento2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'departamentos'!");
 
+            deletarDadosFuncionarios(conn, 1);
+
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
+        }
+    }
+
+    // função para deletar um funcionário com base no ID
+    public static void deletarDadosFuncionarios(Connection conn, int idFuncionario){
+        String sql = "DELETE FROM funcionarios WHERE id_funcionario = " + idFuncionario; // remove uma linha da tabela
+
+        try (Statement stmt = conn.createStatement()) {
+            if (stmt.executeUpdate(sql) > 0) {
+                System.out.println("Funcionário deletado com sucesso");
+
+                String sql2 = "DELETE FROM departamentos WHERE id_departamento = " + idFuncionario;
+
+                if (stmt.executeUpdate(sql2) > 0) { // se o id inserido for encontrado, os departamentos também serão removidos
+                    System.out.println("Departamentos relacionados ao funcionário deletado também foram removidos");
+                }
+            } else {
+                System.out.println("Erro ao deletar, verifique o id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

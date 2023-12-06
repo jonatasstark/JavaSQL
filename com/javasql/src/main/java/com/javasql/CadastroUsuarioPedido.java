@@ -82,10 +82,33 @@ public class CadastroUsuarioPedido {
             stmtInsertPedido2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'pedido'!");
 
+            deletarDadosUsuarios(conn, 1);
+
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
+        }
+    }
+
+    // função para deletar um usuário com base no ID
+    public static void deletarDadosUsuarios(Connection conn, int idUsuario) {
+        String sql = "DELETE FROM usuarios WHERE id_usuario = " + idUsuario; // remove uma linha da tabela
+
+        try (Statement stmt = conn.createStatement()) {
+            if (stmt.executeUpdate(sql) > 0) {
+                System.out.println("Usuário deletado com sucesso");
+
+                String sql2 = "DELETE FROM pedido WHERE id_usuario = " + idUsuario;
+
+                if (stmt.executeUpdate(sql2) > 0) { // se o id inserido for encontrado, os pedidos também serão removidos
+                    System.out.println("Pedidos relacionados ao usuário deletado também foram removidos");
+                }
+            } else {
+                System.out.println("Erro ao deletar, verifique o id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -55,10 +55,33 @@ public class GestaoProdutoCategoria {
             stmtInsertCategoria.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'categoria'!");
 
+            deletarDadosProdutos(conn, 1);
+
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
+        }
+    }
+
+    // função para deletar um produto com base no ID
+    public static void deletarDadosProdutos(Connection conn, int idProduto){
+        String sql = "DELETE FROM produto WHERE id_produto = " + idProduto; // remove uma linha da tabela
+
+        try (Statement stmt = conn.createStatement()) {
+            if (stmt.executeUpdate(sql) > 0) {
+                System.out.println("Produto deletado com sucesso");
+
+                String sql2 = "DELETE FROM categoria WHERE id_categoria = " + idProduto;
+
+                if (stmt.executeUpdate(sql2) > 0) { // se o id inserido for encontrado, as categorias também serão removidas
+                    System.out.println("Categorias relacionadas ao produto deletado também foram removidas");
+                }
+            } else {
+                System.out.println("Erro ao deletar, verifique o id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

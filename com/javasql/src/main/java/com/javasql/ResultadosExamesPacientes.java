@@ -81,9 +81,33 @@ public class ResultadosExamesPacientes {
             pstmtPacientes2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'pacientes'!");
 
+            deletarDadosExames(conn, 1);
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
+        }
+    }
+
+
+    // função para deletar um exame com base no ID
+    public static void deletarDadosExames(Connection conn, int idExame){
+        String sql = "DELETE FROM exames WHERE id_exame = " + idExame; // remove uma linha da tabela
+
+        try (Statement stmt = conn.createStatement()) {
+            if (stmt.executeUpdate(sql) > 0) {
+                System.out.println("Exame deletado com sucesso");
+
+                String sql2 = "DELETE FROM pacientes WHERE id_paciente = " + idExame;
+
+                if (stmt.executeUpdate(sql2) > 0) { // se o id inserido for encontrado, os pacientes também serão removidos
+                    System.out.println("Pacientes relacionados ao exame deletado também foram removidos");
+                }
+            } else {
+                System.out.println("Erro ao deletar, verifique o id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

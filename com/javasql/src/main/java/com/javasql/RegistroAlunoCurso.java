@@ -81,10 +81,33 @@ public class RegistroAlunoCurso {
             stmtInsertCurso2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'cursos'!");
 
+            deletarDadosAlunos(conn, 1);
+
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
+        }
+    }
+
+    // função para deletar um aluno com base no ID
+    public static void deletarDadosAlunos(Connection conn, int idAluno){
+        String sql = "DELETE FROM alunos WHERE id_aluno = " + idAluno; // remove uma linha da tabela
+
+        try (Statement stmt = conn.createStatement()) {
+            if (stmt.executeUpdate(sql) > 0) {
+                System.out.println("Aluno deletado com sucesso");
+
+                String sql2 = "DELETE FROM cursos WHERE id_curso = " + idAluno;
+
+                if (stmt.executeUpdate(sql2) > 0) { // se o id inserido for encontrado, os cursos também serão removidos
+                    System.out.println("Cursos relacionados ao aluno deletado também foram removidos");
+                }
+            } else {
+                System.out.println("Erro ao deletar, verifique o id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

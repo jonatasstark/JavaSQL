@@ -87,10 +87,33 @@ public class AdicaoFornecedoresCompras {
             stmtInsertCompra2.executeUpdate();
             System.out.println("Dados inseridos com sucesso na tabela 'compras'!");
 
+            deletarDadosFornecedores(conn, 1);
+
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
+        }
+    }
+
+    // função para deletar um fornecedor com base no ID
+    public static void deletarDadosFornecedores(Connection conn, int idFornecedor)  {
+        String sql = "DELETE FROM fornecedores WHERE id_fornecedor = " + idFornecedor; // remove uma linha da tabela
+
+        try (Statement stmt = conn.createStatement()) {
+            if (stmt.executeUpdate(sql) > 0) {
+                System.out.println("Fornecedor deletado com sucesso");
+
+                String sql2 = "DELETE FROM compras WHERE id_fornecedor = " + idFornecedor;
+
+                if (stmt.executeUpdate(sql2) > 0) { // se o id inserido for encontrado, as compras também serão removidas
+                    System.out.println("Compras relacionadas ao fornecedor deletado também foram removidas");
+                }
+            } else {
+                System.out.println("Erro ao deletar, verifique o id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
